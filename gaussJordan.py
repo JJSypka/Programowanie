@@ -4,22 +4,22 @@ class EliminacjaGaussaJordana:
         self.rozmiar = len(macierz)
         self.wynik = [0] * self.rozmiar
 
-    def wyswietl_macierz(self, nazwa, macierz):
+    def display_macierz(self, nazwa, macierz):
         print(f'{nazwa} = ')
         for row in macierz:
             print(row)
         print()
 
-    def wyswietl_kroki(self):
+    def display_kroki(self):
         for k in range(self.rozmiar):
-            self.wyswietl_macierz(f'Krok {k + 1}: Macierz przed eliminacją Gaussa-Jordana', self.macierz)
+            self.display_macierz(f'Krok {k + 1}: Macierz przed eliminacją Gaussa-Jordana', self.macierz)
 
             # Skalowanie wiersza
             skalar = self.macierz[k][k]
             for j in range(self.rozmiar + 1):
                 self.macierz[k][j] /= skalar
 
-            self.wyswietl_macierz(f'Krok {k + 1}: Skalowanie wiersza', self.macierz)
+            self.display_macierz(f'Krok {k + 1}: Skalowanie wiersza', self.macierz)
 
             # Eliminacja pozostałych wierszy
             for i in range(self.rozmiar):
@@ -29,7 +29,7 @@ class EliminacjaGaussaJordana:
                     for j in range(self.rozmiar + 1):
                         self.macierz[i][j] -= wspolczynnik * self.macierz[k][j]
 
-            self.wyswietl_macierz(f'Krok {k + 1}: Eliminacja pozostałych wierszy', self.macierz)
+            self.display_macierz(f'Krok {k + 1}: Eliminacja pozostałych wierszy', self.macierz)
 
         print('Wyniki:')
         for i in range(self.rozmiar):

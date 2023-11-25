@@ -51,6 +51,6 @@ class QuadraticEquation:
 
 
 
-rownanie = QuadraticEquation(1, -3, 2)
-wynik = rownanie.display()
-print(wynik)
+#rownanie = QuadraticEquation(1, -3, 2)
+#wynik = rownanie.display()
+#print(wynik)
