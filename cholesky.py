@@ -43,6 +43,6 @@ macierz = [
     [-16, -43, 98]
 ]
 
-cholesky_obliczenia = FaktoryzacjaCholesky(macierz)
-wynik = cholesky_obliczenia.wyswietl_kroki()
-print(wynik)
+#cholesky_obliczenia = FaktoryzacjaCholesky(macierz)
+#wynik = cholesky_obliczenia.wyswietl_kroki()
+#print(wynik)

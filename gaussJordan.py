@@ -36,11 +36,12 @@ class EliminacjaGaussaJordana:
             print(f'x{i + 1} = {self.macierz[i][self.rozmiar]}')
 
 # Przykład użycia klasy:
-macierz = [
-    [2, 1, -1, 8],
-    [-3, -1, 2, -11],
-    [-2, 1, 2, -3]
-]
+#macierz = [
+#    [2, 1, -1, 8],
+#    [-3, -1, 2, -11],
+#    [-2, 1, 2, -3]
 
-eliminacja_gaussa_jordana = EliminacjaGaussaJordana(macierz)
-eliminacja_gaussa_jordana.wyswietl_kroki()
+#]
+
+#eliminacja_gaussa_jordana = EliminacjaGaussaJordana(macierz)
+#eliminacja_gaussa_jordana.wyswietl_kroki()
