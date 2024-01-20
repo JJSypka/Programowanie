@@ -1,47 +1,35 @@
-class EliminacjaGaussaJordana:
-    def __init__(self, macierz):
-        self.macierz = macierz
-        self.rozmiar = len(macierz)
-        self.wynik = [0] * self.rozmiar
+import numpy as np
 
-    def display_macierz(self, nazwa, macierz):
-        print(f'{nazwa} = ')
-        for row in macierz:
-            print(row)
-        print()
+class GaussJordanSolver:
+    def __init__(self, matrix_size):
+        self.matrix_size = matrix_size
+        self.A = np.random.rand(matrix_size, matrix_size + 1)  # Rozszerzona macierz (A|b)
+        self.x = np.zeros(matrix_size)  # Wektor rozwiązań
 
-    def display_kroki(self):
-        for k in range(self.rozmiar):
-            self.display_macierz(f'Krok {k + 1}: Macierz przed eliminacją Gaussa-Jordana', self.macierz)
+    def gauss_jordan_elimination(self):
+        for i in range(self.matrix_size):
+            # Normalizacja wiersza
+            self.A[i, :] /= self.A[i, i]
 
-            # Skalowanie wiersza
-            skalar = self.macierz[k][k]
-            for j in range(self.rozmiar + 1):
-                self.macierz[k][j] /= skalar
+            # Eliminacja współczynników poniżej i powyżej pivotu
+            for j in range(self.matrix_size):
+                if i != j:
+                    factor = self.A[j, i]
+                    self.A[j, :] -= factor * self.A[i, :]
 
-            self.display_macierz(f'Krok {k + 1}: Skalowanie wiersza', self.macierz)
+    def solve(self):
+        print("Macierz przed eliminacją Gaussa-Jordana:")
+        print(self.A)
 
-            # Eliminacja pozostałych wierszy
-            for i in range(self.rozmiar):
-                if i != k:
-                    wspolczynnik = self.macierz[i][k]
+        self.gauss_jordan_elimination()
+        print("\nMacierz po eliminacji Gaussa-Jordana:")
+        print(self.A)
 
-                    for j in range(self.rozmiar + 1):
-                        self.macierz[i][j] -= wspolczynnik * self.macierz[k][j]
+        self.x = self.A[:, -1]
+        print("\nRozwiązanie:")
+        print(self.x)
 
-            self.display_macierz(f'Krok {k + 1}: Eliminacja pozostałych wierszy', self.macierz)
-
-        print('Wyniki:')
-        for i in range(self.rozmiar):
-            print(f'x{i + 1} = {self.macierz[i][self.rozmiar]}')
-
-# Przykład użycia klasy:
-#macierz = [
-#    [2, 1, -1, 8],
-#    [-3, -1, 2, -11],
-#    [-2, 1, 2, -3]
-
-#]
-
-#eliminacja_gaussa_jordana = EliminacjaGaussaJordana(macierz)
-#eliminacja_gaussa_jordana.wyswietl_kroki()
+# Przykład użycia
+matrix_size = 3
+solver = GaussJordanSolver(matrix_size)
+solver.solve()

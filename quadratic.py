@@ -1,56 +1,66 @@
-import math
+import matplotlib.pyplot as plt
+import numpy as np
 
-class QuadraticEquation:
-    def __init__(self, a, b, c):
-        self.a = a
-        self.b = b
-        self.c = c
+class QuadraticEquationSolver:
+    def __init__(self):
+        self.coefficients = []
 
-    def find_delta(self):
-        self.delta = self.b**2 - 4 * self.a * self.c
-        return self.delta
+    def get_user_input(self):
+        print("Podaj współczynniki funkcji kwadratowej ax^2 + bx + c:")
+        a = float(input("a: "))
+        b = float(input("b: "))
+        c = float(input("c: "))
+        self.coefficients = [a, b, c]
 
-    def solve_equation(self):
-        delta = self.find_delta()
+    def calculate_discriminant(self):
+        a, b, c = self.coefficients
+        discriminant = b**2 - 4 * a * c
+        return discriminant
 
-        if delta > 0:
-            x1 = (-self.b + math.sqrt(delta)) / (2 * self.a)
-            x2 = (-self.b - math.sqrt(delta)) / (2 * self.a)
-            return f'Dwa pierwiastki rzeczywiste: x1 = {x1}, x2 = {x2}'
-        elif delta == 0:
-            x = -self.b / (2 * self.a)
-            return f'Jeden pierwiastek rzeczywisty: x = {x}'
+    def calculate_roots(self):
+        a, b, c = self.coefficients
+        discriminant = self.calculate_discriminant()
+
+        if discriminant > 0:
+            root1 = (-b + np.sqrt(discriminant)) / (2 * a)
+            root2 = (-b - np.sqrt(discriminant)) / (2 * a)
+            return root1, root2
+        elif discriminant == 0:
+            root = -b / (2 * a)
+            return root,
         else:
-            # Dla delty mniejszej od zera równanie kwadratowe nie ma pierwiastków rzeczywistych
-            # W tym przypadku możemy wykorzystać pierwiastki zespolone
-            pierwiastek_delta = math.sqrt(abs(delta)) * 1j
-            x1 = (-self.b + pierwiastek_delta) / (2 * self.a)
-            x2 = (-self.b - pierwiastek_delta) / (2 * self.a)
-            return f'Dwa pierwiastki zespolone: x1 = {x1}, x2 = {x2}'
+            return None  # Brak rzeczywistych miejsc zerowych
 
-    def display(self):
-        delta = self.find_delta()
-
-        kroki = [
-            f'Równanie kwadratowe: {self.a}x^2 + {self.b}x + {self.c} = 0',
-            f'Delta: delta = {self.b}^2 - 4 * {self.a} * {self.c} = {delta}'
-        ]
-
-        if delta > 0:
-            kroki.append(f'Delta > 0. Równanie ma dwa pierwiastki rzeczywiste.')
-            kroki.append(self.solve_equation())
-        elif delta == 0:
-            kroki.append(f'Delta = 0. Równanie ma jeden pierwiastek rzeczywisty.')
-            kroki.append(self.solve_equation())
+    def display_steps(self):
+        roots = self.calculate_roots()
+        if roots is not None:
+            print("\nMiejsca zerowe funkcji kwadratowej:")
+            for i, root in enumerate(roots, start=1):
+                print(f"Miejsce zero {i}: {root}")
         else:
-            kroki.append(f'Delta < 0. Równanie ma dwa pierwiastki zespolone.')
-            kroki.append(self.solve_equation())
+            print("\nBrak rzeczywistych miejsc zerowych.")
 
-        return '\n'.join(kroki)
+    def plot_function(self):
+        a, b, c = self.coefficients
+        x = np.linspace(-10, 10, 100)
+        y = a * x**2 + b * x + c
 
+        plt.plot(x, y, label=f'{a}x^2 + {b}x + {c}')
+        plt.axhline(0, color='black',linewidth=0.5)
+        plt.axvline(0, color='black',linewidth=0.5)
+        plt.grid(color = 'gray', linestyle = '--', linewidth = 0.5)
+        plt.title("Wykres funkcji kwadratowej")
+        plt.xlabel("x")
+        plt.ylabel("y")
+        plt.legend()
+        plt.show()
 
+    def solve_quadratic_equation(self):
+        self.get_user_input()
+        self.display_steps()
+        self.plot_function()
 
+# Przykład użycia
+#solver = QuadraticEquationSolver()
 
-#rownanie = QuadraticEquation(1, -3, 2)
-#wynik = rownanie.display()
-#print(wynik)
+#solver.solve_quadratic_equation()

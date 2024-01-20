@@ -1,37 +1,36 @@
-import cholesky as ch
-import 
-#import gauss
-#import gaussJordan
-#import odchylenie
-#import quadratic
-#import wielomiany
+from gauss import GaussianEliminationSolver
+from cholesky import CholeskySolver
+from gaussJordan import GaussJordanSolver
+from odchylenie import StandardDeviationCalculator
+from quadratic import QuadraticEquationSolver
 
 def main():
-    print("Z jakiej metody chcesz skorzystac?")
-    metoda = input("Metoda: ")
-    while True:
-        if metoda == "Cholesky":
-            macierz = [
-                [4, 12, -16],
-                [12, 37, -43],
-                [-16, -43, 98]]
-            cholesky_obliczenia = ch.Cholesky(macierz)
-            wynik = ch.Cholesky.display()
-            print(wynik)
-            break
-        elif metoda == "Gauss":
-                ...
-        elif metoda == "GJordan":
-                ...
-        elif metoda == "Odchylenie":
-                ...
-        elif metoda == "Kwadratow":
-                ...
-        elif metoda == "Wielomiany":
-                ...
-        else:
-            raise ValueError("Niestety nie znam takiej metody!")
-    
+    print("Wybierz metodę obliczeniową:")
+    print("1. Rozwiązanie układu równań liniowych (metoda eliminacji Gaussa)")
+    print("2. Rozwiązanie układu równań liniowych (metoda Cholesky'ego)")
+    print("3. Rozwiązanie układu równań liniowych (metoda Gaussa-Jordana)")
+    print("4. Obliczenie odchylenia standardowego")
+    print("5. Znalezienie miejsc zerowych wielomianu")
 
+    choice = input("Twój wybór: ")
 
-main()
+    if choice == '1':
+        solver = GaussianEliminationSolver()
+        solver.solve()
+    elif choice == '2':
+        solver = CholeskySolver()
+        solver.solve()
+    elif choice == '3':
+        solver = GaussJordanSolver()
+        solver.solve()
+    elif choice == '4':
+        calculator = StandardDeviationCalculator()
+        calculator.calculate_and_display_steps()
+    elif choice == '5':
+        solver = QuadraticEquationSolver()
+        solver.solve_quadratic_equation()
+    else:
+        print("Nieprawidłowy wybór.")
+
+if __name__ == "__main__":
+    main()

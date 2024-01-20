@@ -1,43 +1,39 @@
-class EliminacjaGaussa:
-    def __init__(self, macierz):
-        self.macierz = macierz
-        self.rozmiar = len(macierz)
-        self.wynik = [0] * self.rozmiar
+import numpy as np
 
-    def display_macierz(self, nazwa, macierz):
-        print(f'{nazwa} = ')
-        for row in macierz:
-            print(row)
-        print()
+class GaussianEliminationSolver:
+    def __init__(self, matrix_size):
+        self.matrix_size = matrix_size
+        self.A = np.random.rand(matrix_size, matrix_size + 1)  # Rozszerzona macierz (A|b)
+        self.x = np.zeros(matrix_size)  # Wektor rozwiązań
 
-    def wyswietl_kroki(self):
-        for k in range(self.rozmiar - 1):
-            self.display_macierz(f'Krok {k + 1}: Macierz przed eliminacją Gaussa', self.macierz)
+    def gaussian_elimination(self):
+        for i in range(self.matrix_size):
+            # Wybór elementu głównego (pivot)
+            pivot_index = np.argmax(np.abs(self.A[i:, i])) + i
+            self.A[[i, pivot_index], :] = self.A[[pivot_index, i], :]
 
-            for i in range(k + 1, self.rozmiar):
-                wspolczynnik = self.macierz[i][k] / self.macierz[k][k]
+            # Eliminacja współczynników poniżej pivotu
+            for j in range(i + 1, self.matrix_size):
+                factor = self.A[j, i] / self.A[i, i]
+                self.A[j, i:] -= factor * self.A[i, i:]
 
-                for j in range(k, self.rozmiar + 1):
-                    self.macierz[i][j] -= wspolczynnik * self.macierz[k][j]
+    def back_substitution(self):
+        for i in range(self.matrix_size - 1, -1, -1):
+            self.x[i] = (self.A[i, -1] - np.dot(self.A[i, i+1:-1], self.x[i+1:])) / self.A[i, i]
 
-            self.display_macierz(f'Krok {k + 1}: Macierz po eliminacji Gaussa', self.macierz)
+    def solve(self):
+        print("Macierz przed eliminacją Gaussa:")
+        print(self.A)
 
-        for i in range(self.rozmiar - 1, -1, -1):
-            self.wynik[i] = self.macierz[i][self.rozmiar] / self.macierz[i][i]
+        self.gaussian_elimination()
+        print("\nMacierz po eliminacji Gaussa:")
+        print(self.A)
 
-            for j in range(i + 1, self.rozmiar):
-                self.wynik[i] -= (self.macierz[i][j] / self.macierz[i][i]) * self.wynik[j]
+        self.back_substitution()
+        print(f"\nRozwiązanie po wyliczeniu {matrix_size} niewiadomych z macierzy schodkowej:")
+        print(self.x)
 
-        print('Wyniki:')
-        for i in range(self.rozmiar):
-            print(f'x{i + 1} = {self.wynik[i]}')
-
-# Przykład użycia klasy:
-#macierz = [
-#    [2, 1, -1, 8],
-#    [-3, -1, 2, -11],
-#    [-2, 1, 2, -3]
-]
-
-#eliminacja_gaussa = EliminacjaGaussa(macierz)
-#eliminacja_gaussa.wyswietl_kroki()
+# Przykład użycia
+#matrix_size = 3
+#solver = GaussianEliminationSolver(matrix_size)
+#solver.solve()

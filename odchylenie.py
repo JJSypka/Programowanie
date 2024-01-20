@@ -1,40 +1,42 @@
 import math
 
-class OdchylenieStandardowe:
-    def __init__(self, dane):
-        self.dane = dane
+class StandardDeviationCalculator:
+    def __init__(self):
+        self.data = []
 
-    def mean(self):
-        return sum(self.dane) / len(self.dane)
+    def get_user_input(self):
+        n = int(input("Podaj liczbę danych: "))
+        print("Wprowadź wartości:")
+        for i in range(n):
+            value = float(input(f"Dane {i + 1}: "))
+            self.data.append(value)
 
-    def oblicz_kwadraty_odchylen(self, srednia):
-        return [(x - srednia) ** 2 for x in self.dane]
+    def calculate_mean(self):
+        mean = sum(self.data) / len(self.data)
+        return mean
 
-    def oblicz_odchylenie_standardowe(self):
-        srednia = self.mean()
-        kwadraty_odchylen = self.oblicz_kwadraty_odchylen(srednia)
-        srednia_kwadratow = sum(kwadraty_odchylen) / len(self.dane)
-        odchylenie_standardowe = math.sqrt(srednia_kwadratow)
-        return odchylenie_standardowe
+    def calculate_standard_deviation(self):
+        mean = self.calculate_mean()
 
-    def wyswietl_kroki(self):
-        srednia = self.mean()
-        kwadraty_odchylen = self.oblicz_kwadraty_odchylen(srednia)
-        srednia_kwadratow = sum(kwadraty_odchylen) / len(self.dane)
-        odchylenie_standardowe = math.sqrt(srednia_kwadratow)
+        # Obliczanie kwadratu różnicy między każdym elementem a średnią
+        squared_diff = [(x - mean)**2 for x in self.data]
 
-        kroki = [
-            f'Dane: {self.dane}',
-            f'Średnia: {srednia}',
-            f'Kwadraty odchyleń od średniej: {kwadraty_odchylen}',
-            f'Średnia kwadratów odchyleń: {srednia_kwadratow}',
-            f'Odchylenie standardowe: {odchylenie_standardowe}'
-        ]
+        # Obliczanie średniej arytmetycznej kwadratów różnic
+        mean_squared_diff = sum(squared_diff) / len(self.data)
 
-        return '\n'.join(kroki)
+        # Obliczanie pierwiastka kwadratowego z średniej arytmetycznej kwadratów różnic
+        standard_deviation = math.sqrt(mean_squared_diff)
 
-# Przykład użycia klasy:
-#dane = [2, 4, 4, 4, 5, 5, 7, 9]
-#odchylenie_standardowe_obliczenia = OdchylenieStandardowe(dane)
-#wynik = odchylenie_standardowe_obliczenia.wyswietl_kroki()
-#print(wynik)
+        return standard_deviation
+
+    def calculate_and_display_steps(self):
+        self.get_user_input()
+        mean = self.calculate_mean()
+        print(f"\nŚrednia: {mean}")
+
+        standard_deviation = self.calculate_standard_deviation()
+        print(f"\nOdchylenie standardowe: {standard_deviation}")
+
+# Przykład użycia
+#calculator = StandardDeviationCalculator()
+#calculator.calculate_and_display_steps()
