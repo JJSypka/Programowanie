@@ -37,6 +37,6 @@ class StandardDeviationCalculator:
         standard_deviation = self.calculate_standard_deviation()
         print(f"\nOdchylenie standardowe: {standard_deviation}")
 
-# Przykład użycia
+
 #calculator = StandardDeviationCalculator()
 #calculator.calculate_and_display_steps()

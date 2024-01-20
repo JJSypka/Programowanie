@@ -34,6 +34,6 @@ class GaussianEliminationSolver:
         print(self.x)
 
 # Przykład użycia
-#matrix_size = 3
+matrix_size = 3
 #solver = GaussianEliminationSolver(matrix_size)
 #solver.solve()

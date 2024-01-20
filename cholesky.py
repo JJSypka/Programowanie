@@ -4,7 +4,7 @@ class CholeskySolver:
     def __init__(self, matrix_size):
         self.matrix_size = matrix_size
         self.A = np.random.rand(matrix_size, matrix_size)
-        self.A = np.dot(self.A, self.A.T)  # Zapewniamy, że macierz jest symetryczna i dodatnio określona
+        self.A = np.dot(self.A, self.A.T)  
         self.L = np.zeros((matrix_size, matrix_size))
 
     def cholesky_decomposition(self):

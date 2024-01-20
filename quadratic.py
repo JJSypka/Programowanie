@@ -55,12 +55,18 @@ class QuadraticEquationSolver:
         plt.legend()
         plt.show()
 
+    def calculate_vertex(self):
+        a, b, c = self.coefficients
+        x_vertex = -b / (2 * a)
+        y_vertex = a * x_vertex**2 + b * x_vertex + c
+        print(f"Wierzchołek znajduje się w punkcie {x_vertex}, {y_vertex}")
+    
     def solve_quadratic_equation(self):
         self.get_user_input()
         self.display_steps()
+        self.calculate_vertex()
         self.plot_function()
 
-# Przykład użycia
-#solver = QuadraticEquationSolver()
 
+#solver = QuadraticEquationSolver()
 #solver.solve_quadratic_equation()

@@ -29,7 +29,5 @@ class GaussJordanSolver:
         print("\nRozwiązanie:")
         print(self.x)
 
-# Przykład użycia
-matrix_size = 3
-solver = GaussJordanSolver(matrix_size)
-solver.solve()
+#solver = GaussJordanSolver(matrix_size)
+#solver.solve()
