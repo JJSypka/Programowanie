@@ -1,6 +1,6 @@
 import numpy as np
 
-class CholeskySolver:
+class Cholesky:
     def __init__(self, matrix_size):
         self.matrix_size = matrix_size
         self.A = np.random.rand(matrix_size, matrix_size)

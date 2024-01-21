@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-class QuadraticEquationSolver:
+class QuadraticEquation:
     def __init__(self):
         self.coefficients = []
 
@@ -67,6 +67,3 @@ class QuadraticEquationSolver:
         self.calculate_vertex()
         self.plot_function()
 
-
-#solver = QuadraticEquationSolver()
-#solver.solve_quadratic_equation()

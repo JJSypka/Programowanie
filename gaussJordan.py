@@ -1,6 +1,6 @@
 import numpy as np
 
-class GaussJordanSolver:
+class GaussJordan:
     def __init__(self, matrix_size):
         self.matrix_size = matrix_size
         self.A = np.random.rand(matrix_size, matrix_size + 1)  # Rozszerzona macierz (A|b)

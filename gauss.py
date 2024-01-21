@@ -1,6 +1,6 @@
 import numpy as np
 
-class GaussianEliminationSolver:
+class GaussianElimination:
     def __init__(self, matrix_size):
         self.matrix_size = matrix_size
         self.A = np.random.rand(matrix_size, matrix_size + 1)  # Rozszerzona macierz (A|b)
@@ -33,7 +33,4 @@ class GaussianEliminationSolver:
         print(f"\nRozwiązanie po wyliczeniu {matrix_size} niewiadomych z macierzy schodkowej:")
         print(self.x)
 
-# Przykład użycia
-matrix_size = 3
-#solver = GaussianEliminationSolver(matrix_size)
-#solver.solve()
+
